@@ -1,0 +1,72 @@
+defaultTasks 'clean', 'test', 'aggregate'
+group 'co.com.carvajal.certificacion'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:2.2.0"
+    }
+}
+
+ext {
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '2.2.0'
+    serenityCucumber5Version = '2.2.0'
+    junitVersion = '4.13.1'
+    assertJVersion = '3.23.1'
+    logbackVersion = '1.2.10'
+}
+
+dependencies {
+    // Dependencias de Serenity y Selenium
+    compile "net.serenity-bdd:serenity-core:$serenityCoreVersion"
+    compile "net.serenity-bdd:serenity-junit:$serenityCoreVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "net.serenity-bdd:serenity-screenplay:$serenityCoreVersion"
+    compile "net.serenity-bdd:serenity-screenplay-webdriver:$serenityCoreVersion"
+    compile "net.serenity-bdd:serenity-cucumber5:$rootProject.ext.serenityCucumber5Version"
+
+    // Dependencias de pruebas
+    testImplementation 'net.serenity-bdd:serenity-core:1.1.1'
+    testImplementation 'net.serenity-bdd:serenity-junit:1.1.1'
+    testImplementation "net.serenity-bdd:serenity-screenplay:$serenityCoreVersion"
+    testImplementation "net.serenity-bdd:serenity-ensure:$serenityCoreVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.junit.platform:junit-platform-launcher:1.8.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.8.2"
+    testImplementation "org.assertj:assertj-core:$assertJVersion"
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.5.0")
+
+    // Otras dependencias
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+test {
+    systemProperty "username", System.getProperty("username")
+    systemProperty "password", System.getProperty("password")
+}
+
+test.finalizedBy(aggregate)
