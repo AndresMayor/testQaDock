@@ -12,19 +12,19 @@ import java.io.IOException;
 import static io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE;
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features/login/login.feature",
+@CucumberOptions(features = "src/test/resources/features/login/welcomenginx.feature",
                 glue = "co.com.carvajal.certificacion.gaia.stepdefinitions",
                 snippets = CAMELCASE,
                 monochrome = true)
-public class Login {
+public class Nginx {
 
-    private Login(){
+    private Nginx(){
 
     }
 
    @BeforeSuite
    public static void test() throws InvalidFormatException, IOException {
-       DataToFeature.overrideFeatureFiles("src/test/resources/features/login/login.feature");
+       DataToFeature.overrideFeatureFiles("src/test/resources/features/login/welcomenginx.feature");
    }
 
 }

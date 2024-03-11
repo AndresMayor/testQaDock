@@ -64,9 +64,5 @@ dependencies {
 
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
-test {
-    systemProperty "username", System.getProperty("username")
-    systemProperty "password", System.getProperty("password")
-}
 
 test.finalizedBy(aggregate)
