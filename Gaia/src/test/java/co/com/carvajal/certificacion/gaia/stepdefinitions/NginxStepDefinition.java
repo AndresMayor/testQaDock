@@ -16,7 +16,7 @@ public class NginxStepDefinition {
 
     @Before
     public void starTheStage() {
-        WebDriverManager.edgedriver().setup();
+        WebDriverManager.chromedriver().setup();
         setTheStage(new OnlineCast());
 
     }
