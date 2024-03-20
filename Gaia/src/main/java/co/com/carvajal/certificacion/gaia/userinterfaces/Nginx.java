@@ -8,7 +8,7 @@ import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
 
 
-@DefaultUrl("http://nginx")
+@DefaultUrl("http://localhost")
 public class Nginx  extends PageObject{
 
     public static final Target WELCOME = Target.the("welcomeNginx").located(By.xpath("//body//h1"));
