@@ -8,7 +8,7 @@ import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
 
 
-@DefaultUrl("http://automationqa-nginx")
+@DefaultUrl("http://nginx")
 public class Nginx  extends PageObject{
 
     public static final Target WELCOME = Target.the("welcomeNginx").located(By.xpath("//body//h1"));
